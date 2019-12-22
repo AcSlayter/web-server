@@ -2,23 +2,23 @@
 <Configuration status="info">
 
     <Properties>
-        <Property name="LOG_PATTERN">[start]%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n[end]</Property>
+        <Property name="LOG_PATTERN">[start] %d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} level=%p %m stackTrace="%xThrowable{separator(%n)}"[end]%n</Property>
         <Property name="APP_LOG_ROOT">C:\Users\aaron\Documents\GitHub\web-server\log</Property>
     </Properties>
 
     <Appenders>
         <Console name="CONSOLE" target="SYSTEM_OUT">
             <PatternLayout>
-                <Pattern>"${LOG_PATTERN}"</Pattern>
+                <Pattern>${LOG_PATTERN}</Pattern>
             </PatternLayout>
         </Console>
         <RollingFile
                 name="rollingFile"
                 fileName="${APP_LOG_ROOT}\application.log"
-                filePattern="${APP_LOG_ROOT}\application.%d{dd-MMM}.log"
+                filePattern="${APP_LOG_ROOT}\application.%d{yyyy-MM-dd__'T'HH_mm}.log"
                 ignoreExceptions="false">
             <PatternLayout>
-                <Pattern>"${LOG_PATTERN}"</Pattern>
+                <Pattern>${LOG_PATTERN}</Pattern>
             </PatternLayout>
             <Policies>
                 <OnStartupTriggeringPolicy />
