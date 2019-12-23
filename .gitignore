@@ -2,3 +2,4 @@
 .idea*
 app.Properties.data
 target*
+log*
