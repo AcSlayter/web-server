@@ -77,13 +77,15 @@
      ////   getItemById("68149");
      //});
 function getAccountCharacters(value){
-   var ajax_url = "endpoint_Test/accountCharacters.json?account=".concat(value);
+   //var ajax_url = "endpoint_Test/accountCharacters.json?account=".concat(value);
+   var ajax_url = "api/accountCharacters.json?account=".concat(value);
    $.ajax({
        dataType: 'json',
        url: ajax_url,
        cache: false,
        success: function(data){
-           populatePlayerDropdown(data, "dropdown-account-characters")
+         console.log(data.characterName);
+           populatePlayerDropdown(data.characterName, "dropdown-account-characters")
        }
    });
 }
@@ -96,6 +98,7 @@ document.getElementById("dropdown-account").addEventListener("change", function(
 });
 
 function getAccountName(){
+  //  var ajax_url = "endpoint_Test/accounts.json";
     var ajax_url = "endpoint_Test/accounts.json";
     $.ajax({
         dataType: 'json',

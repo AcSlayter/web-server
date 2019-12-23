@@ -1,1 +1,8 @@
-["character one", "character two"]
+{
+  "characterName": [
+    "Gene Bowman",
+    "Harold Bowman",
+    "Raft Bowman",
+    "Gar Bowman"
+  ]
+}

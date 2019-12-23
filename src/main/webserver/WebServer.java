@@ -1,5 +1,6 @@
 package main.webserver;
 
+import main.api.GuildWars;
 import main.fileSystem.config.Config;
 import main.webserver.helper.TerminalInput;
 
@@ -33,7 +34,7 @@ public class WebServer implements Runnable {
             this.rootDir = rootDirectory;
         }
 
-        this.apiHandler = new ApiHandler();
+        this.apiHandler = new GuildWars();
     }
 
     public void run() {
