@@ -20,7 +20,7 @@ public class FileSystemFile {
         }else if (requestURL.endsWith("/")) {
             return readAllBytes(root.concat(requestURL).concat("index.html"));
         } else {
-             return readAllBytes(root.concat(requestURL));
+             return readAllBytes(root.concat(requestURL).split("\\?")[0]);
         }
     }
 
