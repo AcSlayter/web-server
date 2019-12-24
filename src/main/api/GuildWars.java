@@ -19,8 +19,10 @@ public class GuildWars extends ApiHandler {
 
         if(urlArray[1].equals("gw2")){
             switch (urlArray[3]){
-                case "accountCharacters.json" :
-                    return makeInternalApiCall(arguments.get("account"));
+                case "accountCharacters" :
+                    return makeInternalApiCall("accountCharacters", arguments.get("account"));
+                case "core" :
+                    return makeInternalApiCall("core", arguments.get("account"),arguments.get("name"));
                 default:
                     return "{}".getBytes();
             }
@@ -29,11 +31,20 @@ public class GuildWars extends ApiHandler {
         }
     }
 
-    private byte[] makeInternalApiCall(String account) {
-        if(account == null){
+    private byte[] makeInternalApiCall(String call, String... args) {
+        if(args[0] == null){
             return null;
         }
-        String urlString = String.format("http://localhost:2845/guildwars2/character/all?accountName=%s",account);
+        String urlString = null;
+        switch(call){
+            case "accountCharacters":
+                urlString = String.format("http://localhost:2845/guildwars2/character/all?accountName=%s",args[0]);
+                break;
+            case "core":
+                urlString = String.format("http://localhost:2845/guildwars2/character/core?accountName=%s&name=%s",args[0],args[1]);
+                break;
+        }
+
         try {
             URL url = new URL(urlString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -50,9 +61,7 @@ public class GuildWars extends ApiHandler {
 
             StringBuilder stringBuilder = new StringBuilder();
             String output;
-            System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
-                System.out.println(output);
                 stringBuilder.append(output);
             }
 
